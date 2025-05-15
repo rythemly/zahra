@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>zahra</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to top, #ff9a9e, #fad0c4);
+            height: 100vh;
+            overflow: hidden;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        h1 {
+            font-size: 3rem;
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .button {
+            padding: 15px 30px;
+            background: #ff758c;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.2rem;
+            color: white;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            margin-top: 20px;
+            animation: bounce 2s infinite;
+        }
+
+        .button:hover {
+            background: #ff6075;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0); 
+            }
+            40% {
+                transform: translateY(-10px);
+            }
+            60% {
+                transform: translateY(-5px);
+            }
+        }
+
+        .bubble {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            animation: float 5s infinite;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .bubble:nth-child(1) {
+            width: 50px;
+            height: 50px;
+            bottom: 10%;
+            left: 15%;
+            animation-duration: 6s;
+            animation-delay: 2s;
+        }
+        .bubble:nth-child(2) {
+            width: 70px;
+            height: 70px;
+            bottom: 20%;
+            left: 60%;
+            animation-duration: 7s;
+        }
+        .bubble:nth-child(3) {
+            width: 40px;
+            height: 40px;
+            bottom: 30%;
+            left: 35%;
+            animation-duration: 5s;
+            animation-delay: 1s;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px);
+                opacity: 0;
+            }
+        }
+
+        .doll {
+            position: absolute;
+            bottom: 10%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 150px;
+            height: auto;
+            animation: swing 3s infinite;
+        }
+
+        @keyframes swing {
+            0%, 100% {
+                transform: translateX(-50%) rotate(0deg);
+            }
+            50% {
+                transform: translateX(-50%) rotate(10deg);
+            }
+        }
+
+        #typedText {
+            font-size: 1.5rem;
+            color: #000;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container" id="mainPage">
+        <h1>Haiii Zahra</h1>
+        <button class="button" onclick="showMotivation()">KLIK</button>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+    </div>
+
+    <div class="container hidden" id="motivationPage">
+        <h1>BACA!!</h1>
+        <p id="typedText"></p>
+        <button class="button" onclick="showThankYou()">KLIK</button>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+    </div>
+
+    <div class="container hidden" id="thankYouPage">
+        <h1>Terima Kasih</h1>
+        <p>Maacih sudah membaca hingga akhir. Semoga harimu menyenangkan!<br>Maaf gak bermaksud apa-apa hanya ingin menghibur.</p>
+        <button class="button" onclick="closePage()">Tutup</button>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+    </div>
+
+    <script>
+        function showMotivation() {
+            document.getElementById('mainPage').classList.add('hidden');
+            document.getElementById('motivationPage').classList.remove('hidden');
+            typeText();
+        }
+
+        function showThankYou() {
+            document.getElementById('motivationPage').classList.add('hidden');
+            document.getElementById('thankYouPage').classList.remove('hidden');
+        }
+
+        function closePage() {
+            if (confirm("Halaman akan ditutup. Tekan OK untuk melanjutkan.")) {
+                window.open('', '_self', '');
+                window.close();
+
+                // Fallback jika window.close() tidak bekerja
+                alert("Browser Anda tidak mengizinkan halaman ini ditutup secara otomatis. Silakan tutup tab ini secara manual.");
+            }
+        }
+
+        function typeText() {
+    const lines = [
+        "Kemarin History",
+        "Besok Mystery",
+        "Sekarang Legacy",
+        "Kemarin Milik Sejarah",
+        "Besok Milik Tuhan",
+        "Sekarang Milikmu",
+        "Sudahi Overthinking, Lakukan Yang Terbaik",
+        "Semangat Yaaa, Kamu Spesial Kok Hehe...",
+    ];
+    const typedTextElement = document.getElementById("typedText");
+    let lineIndex = 0;
+    let charIndex = 0;
+
+    function type() {
+        if (lineIndex < lines.length) {
+            if (charIndex < lines[lineIndex].length) {
+                typedTextElement.innerHTML += lines[lineIndex][charIndex];
+                charIndex++;
+                setTimeout(type, 100); // Kecepatan ketik (100 ms per karakter)
+            } else {
+                typedTextElement.innerHTML += "<br>"; // Tambahkan baris baru dengan <br>
+                charIndex = 0;
+                lineIndex++;
+                setTimeout(type, 500); // Jeda sebelum baris berikutnya
+            }
+        }
+    }
+
+    type();
+}
+
+    </script>
+</body>
+</html>
